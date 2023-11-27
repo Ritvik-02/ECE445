@@ -1,0 +1,46 @@
+<div class="content">
+    <h3>Room Availability:</h3>
+    <table>
+        <tr>
+            <th width="100">Room 1</th>
+            <td width="100" id="room1">Available</td>
+        </tr>
+        <tr>
+            <th width="100">Room 2</th>
+            <td width="100" id="room2">Available</td>
+        </tr>
+    </table>
+</div>
+
+<style>
+    .content {
+        text-align: center;
+        padding: 20px 0px;
+        font-size: 20px;
+    }
+</style>
+
+<script>
+    window.onload = () => {
+        console.log("Sanity check!");
+        setInterval(async () => {
+            const myElement = document.getElementById('room1');
+            const res = await fetch('/get-status');
+            const data = await res.json();
+            console.log(data);
+            
+            if(data[0][1] == 1) {
+                myElement.innerText = "Available";
+            } else {
+                myElement.innerText = "Occupied";
+            }
+
+            const myElement2 = document.getElementById('room2');
+            if(data[1][1] == 1) {
+                myElement2.innerText = "Available";
+            } else {
+                myElement2.innerText = "Occupied";
+            }
+        }, 10000);
+    };
+</script>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECE 445</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            Big Brother for ECE Study Rooms
+        </div>
+        <%- body %>
+        <div class="footer">
+            Ritvik Goradia, Siddarth Iyer
+        </div>
+    </div>
+</body>
+
+<style>
+    * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .header {
+        padding: 20px 0px;
+        text-align: center;
+        font-size: 20px;
+        background-color: black;
+        color: white;
+    }
+
+    .footer {
+        margin-top: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px 0px;
+        text-align: center;
+        font-size: 20px;
+        background-color: black;
+        color: white;        
+    }
+</style>
+
+</html>
