@@ -1,13 +1,13 @@
 <div class="content">
     <h3>Room Availability:</h3>
-    <table>
+    <table style="border:1px solid black; margin:0 auto">
         <tr>
-            <th width="100">Room 1</th>
-            <td width="100" id="room1">Available</td>
+            <th style="border:1px solid black;" width="100">Room 1</th>
+            <td style="border:1px solid black;" width="100" id="room1">Available</td>
         </tr>
         <tr>
-            <th width="100">Room 2</th>
-            <td width="100" id="room2">Available</td>
+            <th style="border:1px solid black;" width="100">Room 2</th>
+            <td style="border:1px solid black;" width="100" id="room2">Available</td>
         </tr>
     </table>
 </div>
@@ -29,14 +29,14 @@
             const data = await res.json();
             console.log(data);
             
-            if(data[0][1] == 1) {
+            if(data["1"] == 1) {
                 myElement.innerText = "Available";
             } else {
                 myElement.innerText = "Occupied";
             }
 
             const myElement2 = document.getElementById('room2');
-            if(data[1][1] == 1) {
+            if(data["2"] == 1) {
                 myElement2.innerText = "Available";
             } else {
                 myElement2.innerText = "Occupied";

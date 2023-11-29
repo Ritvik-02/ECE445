@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const { google } = require('googleapis');
 const CONSTS = require('./../utils/constants');
+const fs = require('fs');
+const filePath = 'data.json';
 
 // utils
 const axios = require('axios').default;
@@ -44,14 +46,19 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    var cell = "B" + (parseInt(req.body.room)+1).toString();
-    var stat = req.body.status;
-    console.log(cell);
-    console.log(stat);
-    const sheet = await getGoogleSheet(auth);
-    const data = await writeSheet(sheet, auth, CONSTS.GOOGLE_SHEETS.printingSheetId, cell, stat);
-    // console.log(data);
-    res.send("UPDATE STATUS");
+    try {
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const jsonData = JSON.parse(fileContent);
+        jsonData[req.body.room] = req.body.status;
+        const jsonString = JSON.stringify({...jsonData});
+        fs.writeFileSync(filePath, jsonString);
+        res.status(200);
+        res.send(JSON.stringify(jsonString));
+    } catch (error) {
+        console.error(`Error reading from ${filePath}: ${error.message}`);
+        res.status(400);
+        res.send(JSON.stringify({"error" : "cant read"}));
+    }
 });
 
 // export the router
